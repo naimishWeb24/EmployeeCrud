@@ -1,36 +1,70 @@
 package com.employeecrud.entity;
 
+import java.util.Set;
+
 public class Employee {
 	private int employeeId;
 	private String employeeName;
-	private String employeeSkills;
 	private int employeeAge;
 	private double employeeSalary;
 	private String employeeBirthdate;
+	private String employeeSkills;
+	private int skillemployeeId;
+	private int skillId;
+	@Override
+	public String toString() {
+		return "Employee [employeeId=" + employeeId + ", employeeName=" + employeeName + ", employeeAge=" + employeeAge
+				+ ", employeeSalary=" + employeeSalary + ", employeeBirthdate=" + employeeBirthdate + ", skills=" + skills.toString() + ", employeeSkills=" + employeeSkills + ", skillemployeeId="
+				+ skillemployeeId + ", skillId=" + skillId + "]";
+	}
+
+	private Set<Skills> skills;
+	public Set<Skills> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(Set<Skills> skills) {
+		this.skills = skills;
+	}
 	
 	public Employee() {
 		super();
 	}
 	
-	public Employee(String employeeName, String employeeSkills, int employeeAge, double employeeSalary,
+	public Employee(String employeeName, int employeeAge, double employeeSalary,
 			String employeeBirthdate) {
 		super();
 		this.employeeName = employeeName;
-		this.employeeSkills = employeeSkills;
 		this.employeeAge = employeeAge;
 		this.employeeSalary = employeeSalary;
 		this.employeeBirthdate = employeeBirthdate;
 	}
 	
-	public Employee(int employeeId ,String employeeName, String employeeSkills, int employeeAge, double employeeSalary,
+	public int getSkillId() {
+		return skillId;
+	}
+
+	public void setSkillId(int skillId) {
+		this.skillId = skillId;
+	}
+
+	public Employee(int employeeId ,String employeeName, int employeeAge, double employeeSalary,
 			String employeeBirthdate) {
 		super();
 		this.employeeId = employeeId;
 		this.employeeName = employeeName;
-		this.employeeSkills = employeeSkills;
 		this.employeeAge = employeeAge;
 		this.employeeSalary = employeeSalary;
 		this.employeeBirthdate = employeeBirthdate;
+		this.employeeId = employeeId;
+	}
+	
+	public Employee(String employeeSkills,int employeeId) {
+		super();
+		
+		this.employeeSkills = employeeSkills;
+		this.employeeId = employeeId;
+		
 	}
 
 	public int getEmployeeId() {
@@ -48,12 +82,21 @@ public class Employee {
 	public void setEmployeeName(String employeeName) {
 		this.employeeName = employeeName;
 	}
-	public String getEmployeeSkills() {
-		return employeeSkills;
+	public int getskillemployeeId() {
+		return skillemployeeId;
+	}
+	
+	public void setskillemployeeId(int i) {
+		this.skillemployeeId = i;
+	
 	}
 	
 	public void setEmployeeSkills(String employeeSkills) {
 		this.employeeSkills = employeeSkills;
+	}
+	
+	public String getEmployeeSkills() {
+		return employeeSkills;
 	}
 	
 	public int getEmployeeAge() {
@@ -78,5 +121,4 @@ public class Employee {
 	public void setEmployeeBirthdate(String employeeBirthdate) {
 		this.employeeBirthdate = employeeBirthdate;
 	}
-
 }

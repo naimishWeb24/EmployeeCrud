@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ include file="header.jsp" %>
     <%@page import="com.employeecrud.connection.DatabaseConnection" %>
-    <%@page import="com.employeecrud.dao.EmployeeDAO" %>
+    <%@page import="com.employeecrud.dao.EmployeeDaoImpl" %>
     <%@page import="java.sql.Connection" %>
     <%@page import="java.util.List" %>
     <%@page import="com.employeecrud.entity.Employee" %>
@@ -16,25 +16,13 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
-<title>View Employees</title>
+<title>Employee Management System</title>
 </head>
-<body>
+<body >
 		<div class="container ">
 			<div class="row">
 				<div class="mt-3 mb-3">
 					<center ><h1 >Employee Data</h1></center>
-				<c:if test="${not empty DeleteMessege }">
-					<p class="text-center text-danger">${DeleteMessege}</p>
-					<c:remove var="DeleteMessege"/>
-				</c:if>
-				<c:if test="${not empty errorMessage }">
-					<p class="text-center text-danger">${errorMessage }</p>
-					<c:remove var="errorMessage"/>
-				</c:if>
-				<c:if test="${not empty updateMessage }">
-					<p class="text-center text-success">${updateMessage }</p>
-					<c:remove var="updateMessage"/>
-				</c:if>
 				</div>
 			</div>
 			<div class="container-fluid">
@@ -52,18 +40,22 @@
 						</tr>
 					</thead>
 					<tbody>
-							 <c:forEach var="employee"  items="${employeeList}" varStatus="status">
-                        <tr >
-                         	<td scope="row">${status.count}</td>
-                            <td scope="row">${employee.employeeName}</td>
-                            <td scope="row">${employee.employeeSkills}</td>
-                            <td scope="row">${employee.employeeAge}</td>
-                            <td scope="row">${employee.employeeSalary}</td>
-                            <td scope="row">${employee.employeeBirthdate}</td>
-                            <td><a href="<%= request.getContextPath() %>/InsertEmployeeServlet?action=edit&id=${employee.employeeId}" class="btn btn-primary">Edit</a></td>
-                            <td><a href="<%= request.getContextPath() %>/InsertEmployeeServlet?action=delete&id=${employee.employeeId}" class="btn btn-danger">Delete</a></td>
-                        </tr>
-                    </c:forEach>
+						<c:forEach var="employee" items="${employeeList}" varStatus="status">
+                        	<tr>
+                         		<td scope="row">${status.count}</td>
+                            	<td scope="row">${employee.employeeName}</td>
+	                            <td scope="row">
+	                            	 <c:forEach var="skill" items="${employee.skills}" varStatus="empskill">
+	                           		 ${skill.skill}
+	                           		  </c:forEach>
+	                            </td>
+	                            <td scope="row">${employee.employeeAge}</td>
+	                            <td scope="row">${employee.employeeSalary}</td>
+	                            <td scope="row">${employee.employeeBirthdate}</td>
+	                            <td><a href="<%= request.getContextPath() %>/EmployeeServlet?action=edit&id=${employee.employeeId}" class="btn btn-primary">Edit</a></td>
+	                            <td><a href="<%= request.getContextPath() %>/EmployeeServlet?action=delete&id=${employee.employeeId}" class="btn btn-danger">Delete</a></td>
+	                        </tr>
+                        </c:forEach>
 					</tbody>
 				</table>
 			</div>
